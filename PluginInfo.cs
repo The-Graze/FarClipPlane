@@ -7,6 +7,6 @@
     {
         public const string GUID = "com.brokenstone.gorillatag.farclipplane";
         public const string Name = "FarClipPlane";
-        public const string Version = "1.0.0";
+        public const string Version = "1.0.1";
     }
 }

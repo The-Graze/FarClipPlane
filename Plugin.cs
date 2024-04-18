@@ -5,18 +5,16 @@ using Utilla;
 
 namespace FarClipPlane
 {
-    /// <summary>
-    /// This is your mod's main class.
-    /// </summary>
-
-    /* This attribute tells Utilla to look for [ModdedGameJoin] and [ModdedGameLeave] */
-    [ModdedGamemode]
     [BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
     public class Plugin : BaseUnityPlugin
     {
         public void FixedUpdate()
         {
-            Camera.main.farClipPlane = 25000;
+            foreach(Camera camera in Camera.allCameras)
+            {
+                camera.farClipPlane = float.MaxValue;
+                camera.clearFlags = CameraClearFlags.Skybox;
+            }
         }
     }
 }
