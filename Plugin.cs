@@ -9,19 +9,24 @@ namespace FarClipPlane
     [BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
     public class Plugin : BaseUnityPlugin
     {
-        bool init;
         void Start()
         {
-            GorillaTagger.OnPlayerSpawned(delegate { CosmeticsV2Spawner_Dirty.OnPostInstantiateAllPrefabs2 += delegate { init = true; }; });
+            CosmeticsV2Spawner_Dirty.OnPostInstantiateAllPrefabs2 += wawa;
         }
+
+        private void wawa()
+        {
+            Destroy(this);
+        }
+
         public void FixedUpdate()
         {
-            if (init)
+            foreach (Camera camera in Camera.allCameras)
             {
-                foreach (Camera camera in Camera.allCameras)
+                if (camera.name != "CameraC")
                 {
-                    camera.farClipPlane = float.MaxValue -1;
-                    camera.nearClipPlane = 0.001f;
+                    camera.farClipPlane = 99999;
+                    camera.nearClipPlane = 0.01f;
                     camera.clearFlags = CameraClearFlags.Skybox;
                 }
             }
